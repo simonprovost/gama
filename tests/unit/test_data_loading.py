@@ -38,8 +38,8 @@ def _test_df_d23380(df):
     assert isinstance(df, pd.DataFrame)
     assert (2796, 35) == df.shape
     assert 68100 == df.isnull().sum().sum()
-    assert 32 == sum([dtype in NUMERIC_TYPES for dtype in df.dtypes])
-    assert 3 == sum([dtype.name == "category" for dtype in df.dtypes])
+    assert 32 == sum(dtype in NUMERIC_TYPES for dtype in df.dtypes)
+    assert 3 == sum(dtype.name == "category" for dtype in df.dtypes)
 
 
 def _test_x_y_d23380(x, y):
@@ -47,8 +47,8 @@ def _test_x_y_d23380(x, y):
     assert isinstance(x, pd.DataFrame)
     assert (2796, 34) == x.shape
     assert 68100 == x.isnull().sum().sum()
-    assert 32 == sum([dtype in NUMERIC_TYPES for dtype in x.dtypes])
-    assert 2 == sum([dtype.name == "category" for dtype in x.dtypes])
+    assert 32 == sum(dtype in NUMERIC_TYPES for dtype in x.dtypes)
+    assert 2 == sum(dtype.name == "category" for dtype in x.dtypes)
 
     assert isinstance(y, pd.Series)
     assert (2796,) == y.shape

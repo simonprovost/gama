@@ -67,7 +67,7 @@ def test_random_valid_mutation_with_all(ForestPipeline, config_space):
 
     applied_mutation = defaultdict(int)
 
-    for i in range(_min_trials(n_mutations=4)):
+    for _ in range(_min_trials(n_mutations=4)):
         ind_clone = ForestPipeline.copy_as_new()
         random_valid_mutation_in_place(ind_clone, config_space)
         if _mut_shrink_is_applied(ForestPipeline, ind_clone)[0]:
@@ -81,7 +81,7 @@ def test_random_valid_mutation_with_all(ForestPipeline, config_space):
         else:
             assert False, "No mutation (or one that is unaccounted for) is applied."
 
-    assert all([count > 0 for (mut, count) in applied_mutation.items()])
+    assert all(count > 0 for (mut, count) in applied_mutation.items())
 
 
 def test_random_valid_mutation_without_shrink(LinearSVC, config_space):
@@ -94,7 +94,7 @@ def test_random_valid_mutation_without_shrink(LinearSVC, config_space):
 
     applied_mutation = defaultdict(int)
 
-    for i in range(_min_trials(n_mutations=3)):
+    for _ in range(_min_trials(n_mutations=3)):
         ind_clone = LinearSVC.copy_as_new()
         random_valid_mutation_in_place(ind_clone, config_space)
         if _mut_insert_is_applied(LinearSVC, ind_clone)[0]:
@@ -106,7 +106,7 @@ def test_random_valid_mutation_without_shrink(LinearSVC, config_space):
         else:
             assert False, "No mutation (or one that is unaccounted for) is applied."
 
-    assert all([count > 0 for (mut, count) in applied_mutation.items()])
+    assert all(count > 0 for (mut, count) in applied_mutation.items())
 
 
 def test_random_valid_mutation_without_terminal(GNB, config_space):
@@ -120,7 +120,7 @@ def test_random_valid_mutation_without_terminal(GNB, config_space):
     # and thus is not eligible for replace_terminal and mutShrink.
     applied_mutation = defaultdict(int)
 
-    for i in range(_min_trials(n_mutations=2)):
+    for _ in range(_min_trials(n_mutations=2)):
         ind_clone = GNB.copy_as_new()
         random_valid_mutation_in_place(ind_clone, config_space)
         if _mut_insert_is_applied(GNB, ind_clone)[0]:
@@ -130,7 +130,7 @@ def test_random_valid_mutation_without_terminal(GNB, config_space):
         else:
             assert False, "No mutation (or one that is unaccounted for) is applied."
 
-    assert all([count > 0 for (mut, count) in applied_mutation.items()])
+    assert all(count > 0 for (mut, count) in applied_mutation.items())
 
 
 def test_random_valid_mutation_without_insert(ForestPipeline, config_space):
@@ -145,7 +145,7 @@ def test_random_valid_mutation_without_insert(ForestPipeline, config_space):
     # When specifying max_length=1 it is also not eligible for mut_insert
     applied_mutation = defaultdict(int)
 
-    for i in range(_min_trials(n_mutations=3)):
+    for _ in range(_min_trials(n_mutations=3)):
         ind_clone = ForestPipeline.copy_as_new()
         random_valid_mutation_in_place(ind_clone, config_space, max_length=2)
         if _mut_shrink_is_applied(ForestPipeline, ind_clone)[0]:
@@ -157,7 +157,7 @@ def test_random_valid_mutation_without_insert(ForestPipeline, config_space):
         else:
             assert False, "No mutation (or one that is unaccounted for) is applied."
 
-    assert all([count > 0 for (mut, count) in applied_mutation.items()])
+    assert all(count > 0 for (mut, count) in applied_mutation.items())
 
 
 def _min_trials(n_mutations: int, max_error_rate: float = 0.0001):
@@ -194,9 +194,7 @@ def _mut_insert_is_applied(original, mutated):
     if len(list(original.primitives)) >= len(list(mutated.primitives)):
         return (
             False,
-            "Number of primitives should be strictly greater, was {} is {}.".format(
-                len(list(original.primitives)), len(list(mutated.primitives))
-            ),
+            f"Number of primitives should be strictly greater, was {len(list(original.primitives))} is {len(list(mutated.primitives))}.",
         )
     return True, None
 

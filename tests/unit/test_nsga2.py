@@ -67,5 +67,5 @@ def test_crowd_compare():
     fast_non_dominated_sort(pareto)  # assigns rank
     crowding_distance_assignment(pareto)  # assigns distance
 
-    assert all([three_five.crowd_compare(other) == -1 for other in pareto[2:]])
-    assert all([five_three.crowd_compare(other) == -1 for other in pareto[2:]])
+    assert all(three_five.crowd_compare(other) == -1 for other in pareto[2:])
+    assert all(five_three.crowd_compare(other) == -1 for other in pareto[2:])

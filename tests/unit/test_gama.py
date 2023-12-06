@@ -20,7 +20,8 @@ def test_reproducible_initialization():
     g2 = gama.GamaClassifier(random_state=1, store="nothing")
     pop2 = [g2._operator_set.individual() for _ in range(10)]
     assert all(
-        [ind1.pipeline_str() == ind2.pipeline_str() for ind1, ind2 in zip(pop1, pop2)]
+        ind1.pipeline_str() == ind2.pipeline_str()
+        for ind1, ind2 in zip(pop1, pop2)
     ), "The initial population should be reproducible."
     g1.cleanup("all")
     g2.cleanup("all")

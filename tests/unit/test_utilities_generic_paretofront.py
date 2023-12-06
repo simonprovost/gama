@@ -5,7 +5,7 @@ def test_pareto_initialization_empty():
     """Test initialization of empty front."""
     pf = ParetoFront()
 
-    assert list(pf) == []
+    assert not list(pf)
     assert str(pf) == "[]"
     assert repr(pf) == "ParetoFront([])"
 
@@ -56,7 +56,7 @@ def test_pareto_front_clear():
     assert list(pf) == [(1, 2), (2, 1)]
 
     pf.clear()
-    assert list(pf) == []
+    assert not list(pf)
 
 
 def test_pareto_front_custom_function():
